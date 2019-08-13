@@ -1,13 +1,13 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[0],{
 
-/***/ "./src/show.js":
-/*!*********************!*\
-  !*** ./src/show.js ***!
-  \*********************/
+/***/ "./src/sb.js":
+/*!*******************!*\
+  !*** ./src/sb.js ***!
+  \*******************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("function show(content) {\n  window.alert('hello' + content);\n}\n\nmodule.exports = show;\n\n//# sourceURL=webpack:///./src/show.js?");
+eval("function sb(content) {\n  window.alert(content);\n}\n\nmodule.exports = sb;\n\n//# sourceURL=webpack:///./src/sb.js?");
 
 /***/ })
 

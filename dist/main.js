@@ -208,7 +208,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("new Promise(resolve => {\n  __webpack_require__.e(/*! require.ensure */ 0).then((require => {\n    resolve(__webpack_require__(/*! ./show.js */ \"./src/show.js\"));\n  }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);\n}).then(show => {\n  show('asd');\n});\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("new Promise(resolve => {\n  __webpack_require__.e(/*! require.ensure */ 2).then((require => {\n    resolve(__webpack_require__(/*! ./show.js */ \"./src/show.js\"));\n  }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);\n}).then(show => {\n  show('asd');\n});\nnew Promise(resolve => {\n  __webpack_require__.e(/*! require.ensure */ 0).then((require => {\n    resolve(__webpack_require__(/*! ./sb.js */ \"./src/sb.js\"));\n  }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);\n}).then(sb => {\n  sb('aasdasf');\n});\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ })
 
