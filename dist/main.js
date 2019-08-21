@@ -39,10 +39,16 @@
  	// expose the module cache
  	__webpack_require__.c = installedModules;
 
- 	// define getter function for harmony exports
+
+	 // define getter function for harmony exports
+	 // 为harmony(es6)模块化定义getter函数  传入exports,name,getter
  	__webpack_require__.d = function(exports, name, getter) {
-     debugger
+	 debugger
+		// Object.defineProperty.call(exports,name)
  		if(!__webpack_require__.o(exports, name)) {
+			 // 如果name不是exports对象自身的可枚举属性
+
+			 // 为exports对象定义这个属性
  			Object.defineProperty(exports, name, { enumerable: true, get: getter });
  		}
  	};
@@ -50,10 +56,20 @@
    // define __esModule on exports
    // __webpack_require__.r方法给exports对象添加Symbol.toStringTag属性，并且给__esModule属性设置value为true
  	__webpack_require__.r = function(exports) {
-     debugger
+	 debugger
+
+		// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/toStringTag
+		// Symbol.toStringTag属性用来创建对象的描述
+		// 会被对象的Object.prototype.toString()方法访问到
+		// exports.toSring() === '[Object Module]'
+
  		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
- 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
- 		}
+			// [object Module]
+			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+		}
+		 
+
+		// Module {__esModule:true,Symbol(Symbol.toStringTag):"Module"}
  		Object.defineProperty(exports, '__esModule', { value: true });
  	};
 
@@ -74,13 +90,23 @@
  		return ns;
  	};
 
- 	// getDefaultExport function for compatibility with non-harmony modules
+
+
+	// getDefaultExport function for compatibility with non-harmony modules
+	// 获取默认导出的函数， 与commonjs和es6都要兼容
  	__webpack_require__.n = function(module) {
-     debugger
- 		var getter = module && module.__esModule ?
- 			function getDefault() { return module['default']; } :
- 			function getModuleExports() { return module; };
- 		__webpack_require__.d(getter, 'a', getter);
+	 debugger
+		// 声明getter函数
+ 		var getter = module && module.__esModule ? // 如果是commonJS
+ 			function getDefault() { return module['default']; } :  // getter函数是{return module['default']}
+			 function getModuleExports() { return module; }; // 如果是harmony(es6) getter函数是{return module}
+			 
+		
+		 // Object.defineProperty   如果getter函数没有a属性 那么为getter的a属性定义getter是a
+		 __webpack_require__.d(getter, 'a', getter); //
+
+
+		 // 返回这个getter
  		return getter;
  	};
 
