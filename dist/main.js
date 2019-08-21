@@ -15,8 +15,10 @@
         return __webpack_require__.p + "" + ({}[chunkId] || chunkId) + ".js"
     }
 
-    // The require function
+    // The require function  
+    // webpack_require__函数会像installedModules对象里添加内容，代表加载一个module
     function __webpack_require__(moduleId) {
+        debugger
 
         // Check if module is in cache
         if (installedModules[moduleId]) {
@@ -56,6 +58,7 @@
     // The chunk loading function for additional chunks 翻译: webpack_require__.e 用来加载额外的chunk
                                             //requireEnsure 传入参数chunkId chunkId是0，1，2这样
     __webpack_require__.e = function requireEnsure(chunkId) {
+        debugger
 
         // 声明一个空数组 promises
         var promises = [];
