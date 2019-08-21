@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[3],[,function(n,e,o){new Promise(n=>{o.e(2).then((e=>{n(o(3))}).bind(null,o)).catch(o.oe)}).then(n=>{n("aasdasf")}),n.exports=function(n){window.alert("hello"+n)}}]]);
