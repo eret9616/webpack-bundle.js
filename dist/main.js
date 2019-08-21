@@ -82,7 +82,9 @@
  	};
 
  	// Object.prototype.hasOwnProperty.call
- 	__webpack_require__.o = function(object, property) { debugger return Object.prototype.hasOwnProperty.call(object, property); };
+ 	__webpack_require__.o = function(object, property) { 
+     debugger
+      return Object.prototype.hasOwnProperty.call(object, property); };
 
  	// __webpack_public_path__
  	__webpack_require__.p = "";
