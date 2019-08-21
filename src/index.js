@@ -1,7 +1,5 @@
-import('./show.js').then((show) => {
-    show('asd')
-})
+const show = require('./show.js') //commonjs
+import sb from './sb'   // es6
 
-import('./sb.js').then((sb)=>{
-    sb('aasdasf')
-})
+show('world')
+sb('asdopiasd')

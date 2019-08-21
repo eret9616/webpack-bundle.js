@@ -1,6 +1,3 @@
-function sb(content) {
-    window.alert(content)
+export default function sb(content) {
+    window.alert('sb'+content)
 }
-
-
-module.exports = sb
