@@ -20,7 +20,9 @@
  			exports: {}
  		};
 
- 		// Execute the module function
+     // Execute the module function  
+            //                      调用的时候 __webpack_exports__ 就是module.exports
+            //                      module是一个普通的js对象
  		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
 
  		// Flag the module as loaded
@@ -45,7 +47,8 @@
  		}
  	};
 
- 	// define __esModule on exports
+   // define __esModule on exports
+   // __webpack_require__.r方法给exports对象添加Symbol.toStringTag属性，并且给__esModule属性设置value为true
  	__webpack_require__.r = function(exports) {
      debugger
  		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
