@@ -183,6 +183,7 @@
     // mode & 4: return value when already ns object
     // mode & 8|1: behave like require
     __webpack_require__.t = function (value, mode) {
+        debugger
         if (mode & 1) value = __webpack_require__(value);
         if (mode & 8) return value;
         if ((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
@@ -219,15 +220,35 @@
 
 
     
+
     // install a JSONP callback for chunk loading
     function webpackJsonpCallback(data) {
+
+
+        // 传进去的是一个数组，数组的第0个元素和第1个元素。传进去的data的格式是这样的: 
+        // [[0],{"./src/sb.js":(function)(eval(...()))}] 
+
+
+        debugger
+
         var chunkIds = data[0];
         var moreModules = data[1];
+
+
+        /*
+         * 
+         *     var installedChunks = {
+                    "main": 0
+                };
+         * 
+         */
+
 
 
         // add "moreModules" to the modules object,
         // then flag all "chunkIds" as loaded and fire callback
         var moduleId, chunkId, i = 0, resolves = [];
+
         for (; i < chunkIds.length; i++) {
             chunkId = chunkIds[i];
             if (Object.prototype.hasOwnProperty.call(installedChunks, chunkId) && installedChunks[chunkId]) {
@@ -235,15 +256,20 @@
             }
             installedChunks[chunkId] = 0;
         }
+
         for (moduleId in moreModules) {
             if (Object.prototype.hasOwnProperty.call(moreModules, moduleId)) {
                 modules[moduleId] = moreModules[moduleId];
             }
         }
+
+        // parentJsonpFunction是oldJsonpFunction
+        // var oldJsonpFunction = jsonpArray.push.bind(jsonpArray);
+        // oldJsonpFunction是本地的jsonpArray的push方法
         if (parentJsonpFunction) parentJsonpFunction(data);
 
         while (resolves.length) {
-            resolves.shift()();
+            resolves.shift()(); // shif出来然后执行了 shift是从向左侧移出，
         }
 
     };
