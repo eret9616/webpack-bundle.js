@@ -11,7 +11,7 @@
 
     // script path function
     function jsonpScriptSrc(chunkId) {
-                    // publicPath
+        // publicPath
         return __webpack_require__.p + "" + ({}[chunkId] || chunkId) + ".js"
     }
 
@@ -56,7 +56,7 @@
 
     // This file contains only the entry chunk. 翻译:main.js中只包含了entry chunk
     // The chunk loading function for additional chunks 翻译: webpack_require__.e 用来加载额外的chunk
-                                            //requireEnsure 传入参数chunkId chunkId是0，1，2这样
+    //requireEnsure 传入参数chunkId chunkId是0，1，2这样
     __webpack_require__.e = function requireEnsure(chunkId) {
         debugger
 
@@ -65,7 +65,7 @@
 
         // JSONP chunk loading for javascript // 翻译:javascript JSONP chunk加载方法
         var installedChunkData = installedChunks[chunkId];
-        
+
         // 当前installedChunkData是installedChunks[chunkId]
 
         if (installedChunkData !== 0) { // 0 means "already installed". 如果不是0 意味着未加载(undefined) 正在加载(Promise) preloaded(null)
@@ -77,14 +77,14 @@
                 // 否则
 
                 // setup Promise in chunk cache
-            // 创建了一个promise installedChunkData是一个数组,数组内存放了新promise的resolve和reject方法[]
+                // 创建了一个promise installedChunkData是一个数组,数组内存放了新promise的resolve和reject方法[]
                 var promise = new Promise(function (resolve, reject) {
                     installedChunkData = installedChunks[chunkId] = [resolve, reject];
                 });
                 // installedChunkData[2] 赋值为 promise对象，  此时[resolve,reject,promise对象]
                 //      promises数组推入的是promise对象  *因为赋值表达式返回的是赋的那个值
                 promises.push(installedChunkData[2] = promise);
-                
+
 
                 // start chunk loading // 创建script标签
                 var script = document.createElement('script');
@@ -95,17 +95,17 @@
                 if (__webpack_require__.nc) {
                     script.setAttribute("nonce", __webpack_require__.nc);
                 }
-                
+
                 // jsonpScriptSrc用来生成 标签的地址
                 script.src = jsonpScriptSrc(chunkId);
 
 
-                            // 翻译:在栈解旋前创建错误来方便调试
+                // 翻译:在栈解旋前创建错误来方便调试
                 // create error before stack unwound to get useful stacktrace later
                 var error = new Error();
 
                 onScriptComplete = function (event) {
-                    
+
                     // avoid mem leaks in IE.
                     script.onerror = script.onload = null;
 
@@ -113,11 +113,11 @@
                     clearTimeout(timeout);
 
                     var chunk = installedChunks[chunkId]; // [resolve,reject,promise]
-                    
+
                     if (chunk !== 0) { // 如果不是0
 
                         if (chunk) { //还是truthy 说明还在加载，有问题了
-                                        // type:'timeout' target:是script标签Node
+                            // type:'timeout' target:是script标签Node
                             var errorType = event && (event.type === 'load' ? 'missing' : event.type);
                             var realSrc = event && event.target && event.target.src;
                             error.message = 'Loading chunk ' + chunkId + ' failed.\n(' + errorType + ': ' + realSrc + ')';
@@ -222,7 +222,7 @@
 
 
 
-    
+
 
     // install a JSONP callback for chunk loading
     function webpackJsonpCallback(data) {
@@ -251,13 +251,15 @@
         var moduleId, chunkId, i = 0, resolves = [];
 
 
-        // 储存加载和正在加载chunks的对象
-        // object to store loaded and loading chunks
-        // undefined = chunk not loaded,     【第一种情况undefined 未加载】 falsy
-        // null = chunk preloaded/prefetched 【第二种情况null  chunk preloaded/prefetched】 falsy
-        // Promise = chunk loading,          【第三种情况Promise chunk正在加载】 truthy
-        // 0 = chunk loaded                  【第四种情况0 chunk已经加载】 falsy
-
+        // 标记chunk加载状态
+        /*
+             储存加载和正在加载chunks的对象
+             object to store loaded and loading chunks
+             undefined = chunk not loaded,     【第一种情况undefined 未加载】 falsy
+             null = chunk preloaded/prefetched 【第二种情况null  chunk preloaded/prefetched】 falsy
+             Promise = chunk loading,          【第三种情况Promise chunk正在加载】 truthy
+             0 = chunk loaded                  【第四种情况0 chunk已经加载】 falsy
+         */
         for (; i < chunkIds.length; i++) {
             chunkId = chunkIds[i];
             // 如果installedChunks里面有chunkId 并且 installedChunks[chunkid] 为truthy(即正在加载chunk loading)
@@ -269,6 +271,8 @@
             installedChunks[chunkId] = 0;
         }
 
+
+        // 遍历，将moreModules插入到modules中
         
         for (moduleId in moreModules) {
             // 遍历moreModules对象 判断是否是它自己的属性 (而不是继承的)
@@ -287,7 +291,7 @@
         if (parentJsonpFunction) parentJsonpFunction(data);
 
         while (resolves.length) {
-            resolves.shift()(); // shif出来然后执行了 shift是从向左侧移出，
+            resolves.shift()(); // shift出来然后执行了 shift是从向左侧移出，
         }
     };
 
