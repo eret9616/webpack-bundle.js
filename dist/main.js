@@ -47,8 +47,8 @@
     // object to store loaded and loading chunks
     // undefined = chunk not loaded,     【第一种情况undefined 未加载】 falsy
     // null = chunk preloaded/prefetched 【第二种情况null  chunk preloaded/prefetched】 falsy
-    // Promise = chunk loading,          【第三种情况Promise chunk正在加载】 falsy
-    // 0 = chunk loaded                  【第四种情况0 chunk已经加载】 truthy
+    // Promise = chunk loading,          【第三种情况Promise chunk正在加载】 truthy
+    // 0 = chunk loaded                  【第四种情况0 chunk已经加载】 falsy
     var installedChunks = {
         "main": 0
     };
@@ -234,10 +234,10 @@
 
         debugger
 
+        // 拿到chunkIds
         var chunkIds = data[0];
+        // 拿到moreModules
         var moreModules = data[1];
-
-
         /*
          * 
          *     var installedChunks = {
@@ -246,22 +246,37 @@
          * 
          */
 
-
-
         // add "moreModules" to the modules object,
         // then flag all "chunkIds" as loaded and fire callback
         var moduleId, chunkId, i = 0, resolves = [];
 
+
+        // 储存加载和正在加载chunks的对象
+        // object to store loaded and loading chunks
+        // undefined = chunk not loaded,     【第一种情况undefined 未加载】 falsy
+        // null = chunk preloaded/prefetched 【第二种情况null  chunk preloaded/prefetched】 falsy
+        // Promise = chunk loading,          【第三种情况Promise chunk正在加载】 truthy
+        // 0 = chunk loaded                  【第四种情况0 chunk已经加载】 falsy
+
         for (; i < chunkIds.length; i++) {
             chunkId = chunkIds[i];
+            // 如果installedChunks里面有chunkId 并且 installedChunks[chunkid] 为truthy(即正在加载chunk loading)
             if (Object.prototype.hasOwnProperty.call(installedChunks, chunkId) && installedChunks[chunkId]) {
+                // 向resolves数组里推入resolve函数
                 resolves.push(installedChunks[chunkId][0]);
             }
+            // 标记chunks已经被加载
             installedChunks[chunkId] = 0;
         }
 
+        
         for (moduleId in moreModules) {
+            // 遍历moreModules对象 判断是否是它自己的属性 (而不是继承的)
+            /**
+             * The hasOwnProperty() method returns a boolean indicating whether the object has the specified property as its own property (as opposed to inheriting it).
+             */
             if (Object.prototype.hasOwnProperty.call(moreModules, moduleId)) {
+                // 给modules赋值
                 modules[moduleId] = moreModules[moduleId];
             }
         }
@@ -274,7 +289,6 @@
         while (resolves.length) {
             resolves.shift()(); // shif出来然后执行了 shift是从向左侧移出，
         }
-
     };
 
 
