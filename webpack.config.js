@@ -1,4 +1,8 @@
 module.exports = {
+    entry: {
+        bundle1: './src/bundle1.js',
+        bundle2: './src/bundle2.js'
+    },
     module: {
         rules: [
             {
